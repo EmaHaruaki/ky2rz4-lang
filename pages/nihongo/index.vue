@@ -61,8 +61,8 @@ export default {
       currentAudio: "", // 現在再生中の音声のソースURL
       chatMessage: [
         {
-          sender: "ai",
-          text: "こんにちは、質問をどうぞ",
+          sender: "",
+          text: "",
           audio: "",
         },
       ],
@@ -96,6 +96,27 @@ export default {
         });
         this.$nextTick(() => {
           this.scrollToBottom();
+        });
+      } catch (error) {
+        this.errorMessage = error.response;
+      }
+    },
+    //最初の質問
+    async processQuestion(question) {
+      try {
+        const response = await this.$axios.$post(`/rcms-api/1/chat?text=${question}`);
+        const base64EncodedData = response.mp3.audioContent;
+        const decodedData = window.atob(base64EncodedData);
+        const uint8Array = new Uint8Array(decodedData.length);
+        for (let i = 0; i < decodedData.length; i++) {
+          uint8Array[i] = decodedData.charCodeAt(i);
+        }
+        const blob = new Blob([uint8Array], { type: "audio/mp3" });
+        this.audioSrc = URL.createObjectURL(blob);
+        this.chatMessage.push({
+          sender: "ai",
+          text: response.answer,
+          audio: this.audioSrc,
         });
       } catch (error) {
         this.errorMessage = error.response;
@@ -145,6 +166,10 @@ export default {
         lastMessage.scrollIntoView({ behavior: "smooth", block: "end" });
       }
     },
+  },
+  mounted() {
+    const firstQuestion = "あなたは日本語の教師です。生徒に挨拶をして、フリートークのための簡単な質問を1つ投げてください。";
+    this.processQuestion(firstQuestion);
   },
 };
 </script>
