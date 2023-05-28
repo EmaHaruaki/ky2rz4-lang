@@ -37,13 +37,15 @@
 
       <!-- メッセージ入力 -->
       <div class="input-area">
-        <input
-          v-model="questionEntered"
-          name="question"
-          type="text"
-          placeholder="メッセージを入力"
-        />
-        <button @click.prevent="submitQ">送信</button>
+        <div class="input-text">
+          <input
+            v-model="questionEntered"
+            name="question"
+            type="text"
+            placeholder="メッセージを入力"
+          />
+          <button @click.prevent="submitQ">送信</button>
+        </div>
       </div>
     </div>
   </div>

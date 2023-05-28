@@ -21,7 +21,7 @@ body {
 .message-list {
   flex-grow: 1;
   overflow-y: auto;
-  padding: 10px;
+  padding: 10px 10px 60px; /* 下側のパディングを調整 */
 }
 
 /* メッセージ */
@@ -68,8 +68,17 @@ body {
 
 /* 入力エリア */
 .input-area {
-  display: flex;
-  margin-top: 20px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999;
+  background-color: #f2f2f2;
+}
+
+.input-text {
+  display:flex;
+  padding: 10px;
 }
 
 /* テキスト入力欄 */
