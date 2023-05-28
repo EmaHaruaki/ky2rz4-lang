@@ -79,7 +79,7 @@ export default {
         };
         // get data
         const response = await this.$axios.$post(
-          `/rcms-api/1/chat?text=${this.questionEntered}`
+          `/rcms-api/1/chat_contents_search?text=${this.questionEntered}`
         );
         const base64EncodedData = response.mp3.audioContent;
         const decodedData = window.atob(base64EncodedData);
@@ -104,7 +104,7 @@ export default {
     //最初の質問
     async processQuestion(question) {
       try {
-        const response = await this.$axios.$post(`/rcms-api/1/chat?text=${question}`);
+        const response = await this.$axios.$post(`/rcms-api/1/chat_contents_search?text=${question}`);
         const base64EncodedData = response.mp3.audioContent;
         const decodedData = window.atob(base64EncodedData);
         const uint8Array = new Uint8Array(decodedData.length);
