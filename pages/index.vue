@@ -35,12 +35,12 @@
     <footer class="footer">
       <div class="footer-content">
         <ul>
-          <li><nuxt-link to="/#">アバウト</nuxt-link></li>
-          <li><nuxt-link to="/#">問合せ</nuxt-link></li>
-          <li><nuxt-link to="/#">プライバシーポリシー</nuxt-link></li>
+          <li><nuxt-link to="/#">{{ $t("footer.about") }}</nuxt-link></li>
+          <li><nuxt-link to="/#">{{ $t("footer.contact") }}</nuxt-link></li>
+          <li><nuxt-link to="/#">{{ $t("footer.privacy-policy") }}</nuxt-link></li>
         </ul>
         <div class="site-copyright">
-          <p>コピーライト</p>
+          <p>Copyright</p>
         </div>
       </div>
     </footer>

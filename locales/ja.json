@@ -11,6 +11,8 @@
       "female": "女性"
     },
     "footer": {
-      "about": "アバウト"
+      "about": "アバウト",
+      "contact": "お問い合わせ",
+      "privacy-policy": "プライバシーポリシー"
     }
   }

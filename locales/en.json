@@ -11,6 +11,8 @@
       "female": "Female"
     },
     "footer": {
-      "about": "About"
+      "about": "About",
+      "contact": "Contact",
+      "privacy-policy": "Privacy Policy"
     }
   }
