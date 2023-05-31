@@ -1,0 +1,16 @@
+{
+    "title":"TalkMate",
+    "description":"Choose the language you would like to try",
+    "try-to-talk":"Try to talk",
+    "lang":{
+      "japanese":"Japanese",
+      "english":"English"
+    },
+    "sex": {
+      "male": "Male",
+      "female": "Female"
+    },
+    "footer": {
+      "about": "About"
+    }
+  }

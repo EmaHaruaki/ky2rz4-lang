@@ -1,4 +1,99 @@
 /*/////////////////////////////////////////////////
+//トップページ
+/////////////////////////////////////////////////*/
+
+/* コンテナ */
+.main-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  background-color: #f2f2f2;
+  padding: 10px;
+  text-align: right;
+}
+
+.language-link {
+  color: blue;
+  text-decoration: underline;
+}
+
+.main {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 20px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 0;
+}
+
+.description {
+  margin-top: 10px;
+}
+
+table {
+  margin: 0 auto;
+}
+
+.language-option {
+  font-size: 18px;
+  padding: 10px;
+  text-align: center;
+}
+
+.try-link {
+  color: white;
+  background-color: blue;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.try-link:hover {
+  background-color: darkblue;
+}
+
+.footer {
+  background-color: #f2f2f2;
+  padding: 20px;
+  text-align: center;
+  margin-top: auto;
+}
+
+.footer-content {
+  max-width: 600px;
+  margin: 0 auto;
+  color: #888;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+ul li {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.footer-content ul li a{
+  color: #888;
+  text-decoration: none;
+}
+
+.site-copyright {
+  margin-top: 10px;
+}
+
+/*/////////////////////////////////////////////////
 //チャット画面
 /////////////////////////////////////////////////*/
 

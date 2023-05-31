@@ -1,0 +1,16 @@
+{
+    "title":"トークメイト",
+    "description":"試したい言語を選んでください",
+    "try-to-talk":"話してみる",
+    "lang":{
+      "japanese":"日本語",
+      "english":"英語"
+    },
+    "sex": {
+      "male": "男性",
+      "female": "女性"
+    },
+    "footer": {
+      "about": "アバウト"
+    }
+  }

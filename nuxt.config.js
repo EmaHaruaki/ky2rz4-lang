@@ -42,6 +42,23 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    [
+      'nuxt-i18n',
+      {
+        strategy: 'prefix_and_default',
+        // 切り替える言語を定義
+        locales: [
+          { code: 'ja', file: 'ja.json' },
+          { code: 'en', file: 'en.json' },
+        ],
+        // デフォルトの言語を設定
+        defaultLocale: 'ja',
+        vueI18nLoader: true,
+        lazy: true,
+        // jsonファイルを保存したディレクトリを指定
+        langDir: 'locales/',
+      },
+    ],
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
