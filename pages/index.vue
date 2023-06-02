@@ -14,19 +14,19 @@
       <table>
         <tr>
           <td class="language-option">{{ $t("lang.japanese") }} {{ $t("sex.female") }}</td>
-          <td><nuxt-link to="/nihongo/" class="try-link">{{ $t("try-to-talk") }}</nuxt-link></td>
+          <td><nuxt-link to="/talk/ja/female" class="try-link">{{ $t("try-to-talk") }}</nuxt-link></td>
         </tr>
         <tr>
           <td class="language-option">{{ $t("lang.japanese") }} {{ $t("sex.male") }}</td>
-          <td><nuxt-link to="/nihongo/" class="try-link">{{ $t("try-to-talk") }}</nuxt-link></td>
+          <td><nuxt-link to="/talk/ja/male" class="try-link">{{ $t("try-to-talk") }}</nuxt-link></td>
         </tr>
         <tr>
           <td class="language-option">{{ $t("lang.english") }} {{ $t("sex.female") }}</td>
-          <td><nuxt-link to="/nihongo/" class="try-link">{{ $t("try-to-talk") }}</nuxt-link></td>
+          <td><nuxt-link to="/talk/en/female" class="try-link">{{ $t("try-to-talk") }}</nuxt-link></td>
         </tr>
         <tr>
           <td class="language-option">{{ $t("lang.english") }} {{ $t("sex.male") }}</td>
-          <td><nuxt-link to="/nihongo/" class="try-link">{{ $t("try-to-talk") }}</nuxt-link></td>
+          <td><nuxt-link to="/talk/en/male" class="try-link">{{ $t("try-to-talk") }}</nuxt-link></td>
         </tr>
         
       </table>
