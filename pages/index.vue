@@ -14,19 +14,19 @@
       <table>
         <tr>
           <td class="language-option">{{ $t("lang.japanese") }} {{ $t("sex.female") }}</td>
-          <td><nuxt-link to="/talk/ja/female" class="try-link">{{ $t("try-to-talk") }}</nuxt-link></td>
+          <td><nuxt-link :to="localePath('/talk/ja/female')" class="try-link">{{ $t("try-to-talk") }}</nuxt-link></td>
         </tr>
         <tr>
           <td class="language-option">{{ $t("lang.japanese") }} {{ $t("sex.male") }}</td>
-          <td><nuxt-link to="/talk/ja/male" class="try-link">{{ $t("try-to-talk") }}</nuxt-link></td>
+          <td><nuxt-link :to="localePath('/talk/ja/male')" class="try-link">{{ $t("try-to-talk") }}</nuxt-link></td>
         </tr>
         <tr>
           <td class="language-option">{{ $t("lang.english") }} {{ $t("sex.female") }}</td>
-          <td><nuxt-link to="/talk/en/female" class="try-link">{{ $t("try-to-talk") }}</nuxt-link></td>
+          <td><nuxt-link :to="localePath('/talk/en/female')" class="try-link">{{ $t("try-to-talk") }}</nuxt-link></td>
         </tr>
         <tr>
           <td class="language-option">{{ $t("lang.english") }} {{ $t("sex.male") }}</td>
-          <td><nuxt-link to="/talk/en/male" class="try-link">{{ $t("try-to-talk") }}</nuxt-link></td>
+          <td><nuxt-link :to="localePath('/talk/en/male')" class="try-link">{{ $t("try-to-talk") }}</nuxt-link></td>
         </tr>
         
       </table>
@@ -35,9 +35,9 @@
     <footer class="footer">
       <div class="footer-content">
         <ul>
-          <li><nuxt-link to="/#">{{ $t("footer.about") }}</nuxt-link></li>
-          <li><nuxt-link to="/#">{{ $t("footer.contact") }}</nuxt-link></li>
-          <li><nuxt-link to="/#">{{ $t("footer.privacy-policy") }}</nuxt-link></li>
+          <li><nuxt-link :to="localePath('/#')">{{ $t("footer.about") }}</nuxt-link></li>
+          <li><nuxt-link :to="localePath('/#')">{{ $t("footer.contact") }}</nuxt-link></li>
+          <li><nuxt-link :to="localePath('/#')">{{ $t("footer.privacy-policy") }}</nuxt-link></li>
         </ul>
         <div class="site-copyright">
           <p>Copyright</p>

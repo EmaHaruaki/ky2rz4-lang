@@ -44,7 +44,7 @@
             type="text"
             placeholder="メッセージを入力"
           />
-          <button @click.prevent="submitQ">送信</button>
+          <button @click.prevent="submitQ($route.params)">送信</button>
         </div>
       </div>
     </div>
@@ -71,7 +71,7 @@ export default {
   },
   methods: {
     // 質問が送信された場合
-    async submitQ() {
+    async submitQ(params) {
       this.chatMessage.push({ sender: "user", text: this.questionEntered });
       try {
         const payload = {
@@ -79,7 +79,7 @@ export default {
         };
         // get data
         const response = await this.$axios.$post(
-          `/rcms-api/1/ja/male?text=${this.questionEntered}`
+          `/rcms-api/1/${params.lang}/${params.slug}?_lang=${params.lang}&text=${this.questionEntered}`
         );
         const base64EncodedData = response.mp3.audioContent;
         const decodedData = window.atob(base64EncodedData);
@@ -102,9 +102,11 @@ export default {
       }
     },
     //最初の質問
-    async processQuestion(question) {
+    async processQuestion(question, params) {
       try {
-        const response = await this.$axios.$post(`/rcms-api/1/ja/male?text=${question}`);
+        const response = await this.$axios.$post(
+          `/rcms-api/1/${params.lang}/${params.slug}?_lang=${params.lang}&text=${question}`
+        );
         const base64EncodedData = response.mp3.audioContent;
         const decodedData = window.atob(base64EncodedData);
         const uint8Array = new Uint8Array(decodedData.length);
@@ -168,8 +170,23 @@ export default {
     },
   },
   mounted() {
-    const firstQuestion = "あなたは日本語の教師です。生徒に挨拶をして、フリートークのための簡単な質問を1つ投げてください。";
-    this.processQuestion(firstQuestion);
+    console.log(this.$route.params.lang);
+    let firstQuestion;
+
+    if (this.$route.params.lang === "en") {
+      firstQuestion =
+        "You are an English teacher. Greet your students and throw one simple question for free talk.";
+    } else if (this.$route.params.lang === "ja") {
+      firstQuestion =
+        "あなたは日本語の先生です。生徒に挨拶をして、自由な話題のための簡単な質問を投げかけてください。";
+    } else {
+      // デフォルトの処理を指定（例えば、英語の場合の文言を代入する）
+      firstQuestion =
+        "You are an English teacher. Greet your students and throw one simple question for free talk.";
+    }
+
+    console.log(firstQuestion);
+    this.processQuestion(firstQuestion, this.$route.params);
   },
 };
 </script>
