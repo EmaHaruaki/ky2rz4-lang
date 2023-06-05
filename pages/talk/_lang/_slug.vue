@@ -6,8 +6,8 @@
           <!-- AIからのメッセージ -->
           <div v-if="n.sender === 'ai'">
             <div class="user-content">
-              <img src="user1-icon.png" class="icon" alt="User 1 Icon" />
-              <span class="username">John Doe:</span>
+              <img src="/teachar.png" class="icon" alt="User 1 Icon" />
+              <span class="username">AI:</span>
             </div>
             <div class="message-content">
               <span class="text">{{ n.text }}</span>
@@ -25,14 +25,15 @@
           <!-- ユーザーからのメッセージ -->
           <div v-if="n.sender === 'user'">
             <div class="user-content">
-              <img src="user2-icon.png" class="icon" alt="User 2 Icon" />
-              <span class="username">Jane Smith:</span>
+              <img src="/you.png" class="icon" alt="User 2 Icon" />
+              <span class="username">You:</span>
             </div>
             <div class="message-content">
               <span class="text">{{ n.text }}</span>
             </div>
           </div>
         </div>
+        <div v-if="loading">loading...</div>
       </div>
 
       <!-- メッセージ入力 -->
@@ -44,7 +45,7 @@
             type="text"
             placeholder="メッセージを入力"
           />
-          <button @click.prevent="submitQ($route.params)">送信</button>
+          <button @click.prevent="submitQ($route.params, questionEntered)">送信</button>
         </div>
       </div>
     </div>
@@ -57,6 +58,7 @@ export default {
     return {
       questionEntered: "",
       errorMessage: null,
+      loading: false, //ローディング中のフラグ
       isPlaying: false, // 音声が再生中かどうかを示すフラグ
       currentAudio: "", // 現在再生中の音声のソースURL
       chatMessage: [
@@ -71,16 +73,18 @@ export default {
   },
   methods: {
     // 質問が送信された場合
-    async submitQ(params) {
-      this.chatMessage.push({ sender: "user", text: this.questionEntered });
+    async submitQ(params, questionEntered, isMounted = false) {
+      this.loading = true;
+      //最初の質問は無視する
+      if (!isMounted) {
+        this.chatMessage.push({ sender: "user", text: questionEntered });
+      }
       try {
-        const payload = {
-          question: this.questionEntered,
-        };
         // get data
         const response = await this.$axios.$post(
-          `/rcms-api/1/${params.lang}/${params.slug}?_lang=${params.lang}&text=${this.questionEntered}`
+          `/rcms-api/1/${params.lang}/${params.slug}?_lang=${params.lang}&text=${questionEntered}`
         );
+        //デコード処理
         const base64EncodedData = response.mp3.audioContent;
         const decodedData = window.atob(base64EncodedData);
         const uint8Array = new Uint8Array(decodedData.length);
@@ -89,36 +93,17 @@ export default {
         }
         const blob = new Blob([uint8Array], { type: "audio/mp3" });
         this.audioSrc = URL.createObjectURL(blob);
+        //ローディング終了
+        this.loading = false;
+        //メッセージ追加
         this.chatMessage.push({
           sender: "ai",
           text: response.answer,
           audio: this.audioSrc,
         });
+        //回答後下部に移動
         this.$nextTick(() => {
           this.scrollToBottom();
-        });
-      } catch (error) {
-        this.errorMessage = error.response;
-      }
-    },
-    //最初の質問
-    async processQuestion(question, params) {
-      try {
-        const response = await this.$axios.$post(
-          `/rcms-api/1/${params.lang}/${params.slug}?_lang=${params.lang}&text=${question}`
-        );
-        const base64EncodedData = response.mp3.audioContent;
-        const decodedData = window.atob(base64EncodedData);
-        const uint8Array = new Uint8Array(decodedData.length);
-        for (let i = 0; i < decodedData.length; i++) {
-          uint8Array[i] = decodedData.charCodeAt(i);
-        }
-        const blob = new Blob([uint8Array], { type: "audio/mp3" });
-        this.audioSrc = URL.createObjectURL(blob);
-        this.chatMessage.push({
-          sender: "ai",
-          text: response.answer,
-          audio: this.audioSrc,
         });
       } catch (error) {
         this.errorMessage = error.response;
@@ -186,7 +171,7 @@ export default {
     }
 
     console.log(firstQuestion);
-    this.processQuestion(firstQuestion, this.$route.params);
+    this.submitQ(this.$route.params, firstQuestion, true);
   },
 };
 </script>
