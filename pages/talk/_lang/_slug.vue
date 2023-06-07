@@ -40,6 +40,7 @@
       <div class="input-area">
         <div class="input-text">
           <input
+            ref="questionInput"
             v-model="questionEntered"
             name="question"
             type="text"
@@ -75,7 +76,13 @@ export default {
     // 質問が送信された場合
     async submitQ(params, questionEntered, isMounted = false) {
       this.loading = true;
-      this.questionEntered = "";
+      this.questionEntered = ""; // テキスト入力欄を空にする
+
+      // スマートフォンの場合、仮想キーボードを閉じる
+      if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        this.$refs.questionInput.blur(); // フォーカスを外すことでキーボードを閉じる
+      }
+
       //最初の質問は無視する
       if (!isMounted) {
         this.chatMessage.push({ sender: "user", text: questionEntered });
