@@ -75,6 +75,7 @@ export default {
     // 質問が送信された場合
     async submitQ(params, questionEntered, isMounted = false) {
       this.loading = true;
+      this.questionEntered = "";
       //最初の質問は無視する
       if (!isMounted) {
         this.chatMessage.push({ sender: "user", text: questionEntered });
@@ -107,6 +108,13 @@ export default {
         });
       } catch (error) {
         this.errorMessage = error.response;
+        //ローディング終了
+        this.loading = false;
+        //メッセージ追加
+        this.chatMessage.push({
+          sender: "ai",
+          text: "sorry some error happend. please try again",
+        });
       }
     },
     // 音声の再生/停止を切り替える
