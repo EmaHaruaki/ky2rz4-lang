@@ -7,7 +7,7 @@
           <div v-if="n.sender === 'ai'">
             <div class="user-content">
               <img src="/teachar.png" class="icon" alt="User 1 Icon" />
-              <span class="username">AI:</span>
+              <span class="username">{{teachar.name}}:</span>
             </div>
             <div class="message-content">
               <span class="text">{{ n.text }}</span>
@@ -99,6 +99,8 @@
 </template>
 
 <script>
+import { getPageData } from '~/utils/pageData';
+
 export default {
   data() {
     return {
@@ -115,6 +117,15 @@ export default {
         },
       ],
       audioSrc: "", // 再生する音声のソースURL
+    };
+  },
+  //トークメイトの情報を取得
+  async asyncData({ params }) {
+    const { slug, lang } = params;
+    const pageData = getPageData(slug, lang);
+    console.log(pageData);
+    return {
+      teachar: pageData
     };
   },
   methods: {
@@ -219,7 +230,7 @@ export default {
     },
   },
   mounted() {
-    console.log(this.$route.params.lang);
+    //console.log(this.$route.params.lang);
     let firstQuestion;
 
     if (this.$route.params.lang === "en") {
@@ -234,7 +245,7 @@ export default {
         "You are an English teacher. Greet your students and throw one simple question for free talk.";
     }
 
-    console.log(firstQuestion);
+    //console.log(firstQuestion);
     this.submitQ(this.$route.params, firstQuestion, true);
   },
 };

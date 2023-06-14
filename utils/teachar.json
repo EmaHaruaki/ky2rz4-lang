@@ -1,0 +1,22 @@
+[
+    {
+        "sex": "male",
+        "lang": "ja",
+        "name": "Yamada Taro"
+    },
+    {
+        "sex": "female",
+        "lang": "ja",
+        "name": "Yamada Hanako"
+    },
+    {
+        "sex": "male",
+        "lang": "en",
+        "name": "Jon"
+    },
+    {
+        "sex": "female",
+        "lang": "en",
+        "name": "Angelica"
+    }
+]
