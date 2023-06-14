@@ -16,7 +16,25 @@
                   :class="{ playing: isPlaying && n.audio === currentAudio }"
                   @click="toggleAudio(n.audio)"
                 >
-                  {{ isPlaying && n.audio === currentAudio ? "停止" : "再生" }}
+                  <svg
+                    v-if="isPlaying && n.audio === currentAudio"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                  >
+                    <rect x="6" y="4" width="4" height="16" fill="currentColor"></rect>
+                    <rect x="14" y="4" width="4" height="16" fill="currentColor"></rect>
+                  </svg>
+                  <svg
+                    v-else
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M8 5v14l11-7z" fill="currentColor" />
+                  </svg>
                 </button>
               </div>
             </div>
@@ -33,7 +51,7 @@
             </div>
           </div>
         </div>
-        <div v-if="loading">loading...</div>
+        <div v-if="loading" class="loading"><span class="loader"></span></div>
       </div>
 
       <!-- メッセージ入力 -->
@@ -46,7 +64,34 @@
             type="text"
             placeholder="メッセージを入力"
           />
-          <button @click.prevent="submitQ($route.params, questionEntered)">送信</button>
+          <button
+            @click.prevent="submitQ($route.params, questionEntered)"
+            type="submit"
+            class="flex items-center justify-center flex-none w-10 h-10 ml-2 bg-green-500 rounded-full"
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M22 2L11 13"
+                stroke="white"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></path>
+              <path
+                d="M22 2L15 22L11 13L2 9L22 2Z"
+                stroke="white"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></path>
+            </svg>
+          </button>
         </div>
       </div>
     </div>
@@ -79,7 +124,11 @@ export default {
       this.questionEntered = ""; // テキスト入力欄を空にする
 
       // スマートフォンの場合、仮想キーボードを閉じる
-      if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+      if (
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+          navigator.userAgent
+        )
+      ) {
         this.$refs.questionInput.blur(); // フォーカスを外すことでキーボードを閉じる
       }
 

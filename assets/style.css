@@ -187,25 +187,66 @@ body {
 
 /* 送信ボタン */
 .input-area button {
-  padding: 10px 20px;
   background-color: #007aff;
   color: #ffffff;
   border: none;
-  border-radius: 5px;
+  border-radius: 500px;
   margin-left: 10px;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.loading {
+  margin-right: auto;
+  margin-left: 2.5rem;
+  padding: 1rem;
+}
+
+.loader {
+  animation: animloader 2s linear infinite;
+  border-radius: 50%;
+  box-sizing: border-box;
+  color: #d3d3d3;
+  display: block;
+  height: 12px;
+  position: relative;
+  width: 12px;
+}
+
+@keyframes animloader {
+  0% {
+      box-shadow: 14px 0 0 -2px,38px 0 0 -2px,-14px 0 0 -2px,-38px 0 0 -2px
+  }
+
+  25% {
+      box-shadow: 14px 0 0 -2px,38px 0 0 -2px,-14px 0 0 -2px,-38px 0 0 2px
+  }
+
+  50% {
+      box-shadow: 14px 0 0 -2px,38px 0 0 -2px,-14px 0 0 2px,-38px 0 0 -2px
+  }
+
+  75% {
+      box-shadow: 14px 0 0 2px,38px 0 0 -2px
+  }
 }
 
 /* オーディオボタン */
 .audio button {
-  display: inline-block;
-  padding: 5px 10px;
   border: none;
   border-radius: 5px;
   background-color: #007aff;
   color: #ffffff;
-  font-size: 12px;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2rem;
+  height: 1.5rem;
 }
 
 .audio button.playing {
